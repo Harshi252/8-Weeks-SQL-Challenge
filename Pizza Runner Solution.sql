@@ -1,5 +1,5 @@
 --------------------------------
---CASE STUDY #1: DANNY'S DINER--
+--CASE STUDY #2: Pizza Runner--
 --------------------------------
 
 CREATE SCHEMA pizza_runner;
@@ -162,28 +162,28 @@ FROM pizza_runner.runner_orders;
 
 ---1. How many pizzas were ordered?
 select
-    count(co.pizza_id),
-	pn.pizza_name
+   count(co.pizza_id),
+   pn.pizza_name
 from
-   	 pizza_runner.customer_orders co
+   pizza_runner.customer_orders co
 join
-   	 pizza_runner.pizza_names pn on co.pizza_id = pn.pizza_id
+   pizza_runner.pizza_names pn on co.pizza_id = pn.pizza_id
 group by
-   	 pn.pizza_name;
+   pn.pizza_name;
 
 ---2. How many unique customer orders were made?
 select
-   	 count(distinct co.order_id)
+   count(distinct co.order_id)
 from
-   	 pizza_runner.customer_orders co;
+   pizza_runner.customer_orders co;
 
 ---3. How many successful orders were delivered by each runner?
 select
-   	count(order_id)
+   count(order_id)
 from 
     ro_temp
 where
-   	distance != ' ';
+   distance != ' ';
 
 ---5. How many Vegetarian and Meatlovers were ordered by each customer?
     select
@@ -248,7 +248,7 @@ order by 1;
 
 ---2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 set
-    search_path=pizza_runner;
+  search_path=pizza_runner;
 
 SELECT
   runner_id,
