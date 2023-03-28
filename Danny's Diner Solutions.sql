@@ -60,18 +60,28 @@ VALUES
 ------------------------
 
 ---1. What is the total amount each customer spent at the restaurant?
-select customer_id, sum(price)
-from dannys_diner.sales s
+select 
+  customer_id, 
+  sum(price)
+from 
+  dannys_diner.sales s
 join dannys_diner.menu m
-on s.product_id = m.product_id
-group by s.customer_id
-order by s.customer_id;
+  on s.product_id = m.product_id
+group by 
+  s.customer_id
+order by 
+  s.customer_id;
 
 ---2. How many days has each customer visited the restaurant?
-select s.customer_id, count(s.order_date)
-from dannys_diner.sales s
-group by s.customer_id
-order by s.customer_id;
+select 
+  s.customer_id, 
+  count(s.order_date)
+from 
+  dannys_diner.sales s
+group by 
+  s.customer_id
+order by 
+  s.customer_id;
 
 ---3. What was the first item from the menu purchased by each customer?
 with ranked as (
@@ -93,13 +103,13 @@ select
     product_name,
     order_date::varchar   #used varchar to remove timestamp, cast is used
 from
-   	ranked
+    ranked
 where
-   	ranking = 1;
+    ranking = 1;
     
 ---4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 select
-   	s.product_id,
+    s.product_id,
     m.product_name,
     count(s.product_id) as total_count
 from
@@ -107,10 +117,10 @@ from
 join dannys_diner.menu m
    	on s.product_id = m.product_id
 group by
-   	s.product_id,
+    s.product_id,
     m.product_name
 order by
-   	s.product_id desc
+    s.product_id desc
     Limit 1;
 
 ---5. Which item was the most popular for each customer?
@@ -132,14 +142,14 @@ with ranked as(
  )
 
 select
-	customer_id,
-	product_id,
-	product_name,
-	total_count
+  customer_id,
+  product_id,
+  product_name, 
+  total_count
 from
-	ranked
+  ranked
 where
-	ranking = 1;
+  ranking = 1;
  
 
 ---6. Which item was purchased first by the customer after they became a member?
@@ -167,9 +177,9 @@ SELECT
     product_id,
     product_name
 from
-   	joined
+   joined
 where
-   	rank = 1;
+   rank = 1;
 
 ---7. Which item was purchased just before the customer became a member?
 with joined as (
@@ -196,9 +206,9 @@ SELECT
     product_id,
     product_name
 from
-   	joined
+   joined
 where
-   	rank = 1;
+   rank = 1;
 
 
 ---8. What is the total items and amount spent for each member before they became a member?
@@ -223,7 +233,7 @@ with joined as (
 SELECT
     *
 from
-   	joined;
+   joined;
 
 ---9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 with points as(
@@ -247,9 +257,9 @@ SELECT
     customer_id,
     sum(points)
 FROM
-   	points
+   points
 group by
-   	1
+   1
 order by
     customer_id;
 
@@ -264,13 +274,6 @@ with points as(
      		 WHEN m.product_name = 'sushi' THEN 2 * 10 * m.price
      		 WHEN s.order_date BETWEEN mm.join_date AND mm.join_date + integer '6' THEN 2 * 10 * m.price
      		 ELSE 10 * m.price
-     		 -- when s.order_date < mm.join_date or s.order_date >= mm.join_date + integer'7'
-     		 -- and m.product_name = 'curry' or m.product_name = 'ramen'
-     		 -- then m.price * 10
-     		 -- when s.order_date < mm.join_date or s.order_date > mm.join_date + integer'7'
-     		 -- and m.product_name = 'sushi'
-     		 -- then m.price * 20
-     		 -- else m.price * 20
     	end as points
     FROM
     	dannys_diner.sales s
