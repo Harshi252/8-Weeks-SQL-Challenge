@@ -2,6 +2,7 @@
 Solutions of the 8 Week SQL Challenge - proudly brought to you by the Data With Danny. https://8weeksqlchallenge.com/
 
 [* Case Study #1: Danny's Diner](https://github.com/Harshi252/8-Weeks-SQL-Challenge/blob/main/Danny's%20Diner%20Solutions.sql)
+
 [* Case Study #2: Pizza Runner](https://github.com/Harshi252/8-Weeks-SQL-Challenge/blob/main/Danny's%20Diner%20Solutions.sql)
 
 ___
