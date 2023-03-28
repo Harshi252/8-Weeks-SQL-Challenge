@@ -10,4 +10,4 @@ Solutions of the 8 Week SQL Challenge - proudly brought to you by the Data With 
 * Case Study #7
 * Case Study #8
 
-Alt-H2
+____________________________________________________________________________________________________________
